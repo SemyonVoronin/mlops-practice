@@ -1,0 +1,34 @@
+artifact_path: "file:///C:/Users/user/Desktop/\u0421\u0435\u043C\u0451\u043D/\u0420\
+  \u0443\u0442 (\u041C\u0418\u0418\u0422)/4 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\
+  /\u0418\u0426\u0421/\u042D\u043A\u0437\u0430\u043C\u0435\u043D/mlops-practice/mlruns/1/models/m-6441465b2011456f9ddf28fd6b7f2e45/artifacts"
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.0
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.14.0
+model_id: m-6441465b2011456f9ddf28fd6b7f2e45
+model_size_bytes: 91425
+model_uuid: m-6441465b2011456f9ddf28fd6b7f2e45
+prompts: null
+run_id: 4f58cd1fd92a4d37a7a1f1cf83b522f2
+signature:
+  inputs: '[{"type": "double", "name": "sepal length (cm)", "required": true}, {"type":
+    "double", "name": "sepal width (cm)", "required": true}, {"type": "double", "name":
+    "petal length (cm)", "required": true}, {"type": "double", "name": "petal width
+    (cm)", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-06-24 13:19:55.730963'
