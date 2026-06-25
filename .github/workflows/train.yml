@@ -23,6 +23,10 @@ jobs:
 
       - name: Setup CML
         uses: iterative/setup-cml@v2
+        with:
+          version: '2.0.0'
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
       - name: Install dependencies
         run: pip install -r requirements.txt
