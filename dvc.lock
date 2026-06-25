@@ -26,7 +26,7 @@ stages:
     params:
       params.yaml:
         train.max_depth: 2
-        train.n_estimators: 5
+        train.n_estimators: 3
     outs:
     - path: metrics.json
       hash: md5
@@ -34,5 +34,5 @@ stages:
       size: 17
     - path: models/model.pkl
       hash: md5
-      md5: 2f9087a875d380f91085d39fa26cca02
-      size: 6001
+      md5: b330c96d6e6e847f7ae26a7cb9356f86
+      size: 4305
