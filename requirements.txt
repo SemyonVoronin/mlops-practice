@@ -1,5 +1,11 @@
 scikit-learn
-pyyaml
+pandas
 joblib
+pyyaml
+dvc
+dvc-s3
+mlflow
 pre-commit
 ruff
+pytest
+pandera
