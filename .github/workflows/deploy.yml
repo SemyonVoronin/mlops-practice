@@ -1,20 +1,19 @@
-name: CD Pipeline (Deploy to HF Spaces)
+name: CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install deps
         run: pip install -r requirements.txt
 
-      - name: Pull Model from DVC
+      - name: DVC pull
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -22,7 +21,7 @@ jobs:
           dvc remote modify cloudru endpointurl https://s3.cloud.ru
           dvc pull
 
-      - name: Push to Hugging Face Spaces
+      - name: Push to HF
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_USER: Semyon-MLOps
@@ -39,5 +38,5 @@ jobs:
           find space_repo -name "__pycache__" -type d -exec rm -rf {} +
           cd space_repo
           git add .
-          git commit -m "Deploy from GitHub Actions" || echo "No changes to commit"
+          git commit -m "Deploy" || echo "No changes"
           git push
