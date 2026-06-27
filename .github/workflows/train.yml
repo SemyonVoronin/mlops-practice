@@ -1,4 +1,4 @@
-name: Train and Report (CML)
+name: Train and Report
 
 on:
   pull_request:
@@ -21,9 +21,6 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Setup CML
-        uses: iterative/setup-cml@v2
-
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -38,13 +35,20 @@ jobs:
       - name: Reproduce pipeline
         run: dvc repro
 
-      - name: Create CML report
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate report
+        id: report
         run: |
           echo "## Результаты эксперимента" > report.md
           echo "### Изменения параметров:" >> report.md
           dvc params diff main --md >> report.md
           echo "### Изменения метрик:" >> report.md
           dvc metrics diff main --md >> report.md
-          cml comment create report.md
+          echo 'REPORT<<EOF' >> $GITHUB_OUTPUT
+          cat report.md >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+      - name: Comment PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ steps.report.outputs.REPORT }}
